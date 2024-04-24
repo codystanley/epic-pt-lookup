@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../intake_mockup_AS_P1"
+		},
+		{
+			"path": "../epic-oauth-test"
 		}
 	],
 	"settings": {}

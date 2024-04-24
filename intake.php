@@ -66,49 +66,21 @@ if (isset($_SESSION['access_token'])) {
                 </div><!-- #formRow1 -->
 
 <!-- Modal -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p id="modalContent"></p>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalContent"></p>
+        </div>
     </div>
-</div>
 
-
-<?php
-echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>';
-include 'footer.php';
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
+<?php } else {
+    /* If we don't have a token, redirect to the login page */
+    header('Location: /index.php');
+};
 ?>
-
-<?php
-
-
-    // Search by MRN
-    if (isset($_GET['identifier'])) {
-        $identifier = $_GET['identifier'];
-        $searchParams = ['identifier' => $identifier];
-        performPatientSearch($searchParams); 
-    } 
-
-    //Search by DOB, Last and First
-    elseif (isset($_GET['birthdate']) && isset($_GET['lastName']) && isset($_GET['firstName'])) {
-        $birthdate = $_GET['birthdate'];
-        $lastName = $_GET['lastName'];
-        $firstName = $_GET['firstName'];
-        $searchParams = [
-            'given' => $firstName,  
-            'family' => $lastName,
-            'birthdate' => $birthdate
-        ];
-        performPatientSearch($searchParams);
-    }
-
-    //  Handle the case where no valid search parameters are present
-    else {
-        echo "<p>Please select a search method and provide valid search parameters.</p>";
-    }
-
-} else {
-    // User is not logged in
-    header('Location: /index.html'); // or your login page
-    exit;
-}

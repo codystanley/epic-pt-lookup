@@ -1,4 +1,17 @@
 <?php
+
+if (isset($_GET['dob']) && isset($_GET['ptLastName']) && isset($_GET['ptFirstName'])) {
+    $birthdate = $_GET['dob'];
+    $lastName = $_GET['ptLastName'];
+    $firstName = $_GET['ptFirstName'];
+    $searchParams = [
+        'given' => $firstName,  
+        'family' => $lastName,
+        'birthdate' => $birthdate
+    ];
+    
+    performPatientSearch($searchParams);
+}
 // Patient Search Logic (When the form is submitted)
 function performPatientSearch($searchParams) { // A function to handle searches with varied parameters
     $baseUrl = 'https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4/Patient';  
