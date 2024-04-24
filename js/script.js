@@ -1,7 +1,3 @@
-
-
-
-
 $(document).ready(function() {
     /**
      * Event handler for the 'change' event of the '#dob' input element.
@@ -9,7 +5,7 @@ $(document).ready(function() {
      * Then the label is updated with the calculated age.
      *
      * @listens #dob:change
-     */
+     **/
 
     $("#dob").change(function() {
         // Get the entered date
@@ -26,33 +22,26 @@ $(document).ready(function() {
         // Update the label
         $("label[for='dob']").text("Date of Birth* (Age: " + age + ")");
     });
+
+    // Patient Search Functionality
+    const patientSearchForm = document.getElementById('intakeForm');
+    document.getElementById('nextPatientButton').addEventListener('click', epicPatientSearch);
+
+    function epicPatientSearch() {
+        fetch ('/epicSearch', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ dob, lastName, firstName })
+        })
+
+        .then(response => {
+    //const searchResultsDiv = document.getElementById('searchResults');
+
+
+
+
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-document.getElementById('myForm').addEventListener('submit', function(e) {
-    
-    e.preventDefault();
-
-    var formData = new FormData(e.target);
-    var dob = formData.get('dob');
-    var ptLastName = formData.get('ptLastName');
-    var ptFirstName = formData.get('ptFirstName');
-
-    fetch('/epicSearch.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' 
-        },
-        body: JSON.stringify({ dob, ptLastName, ptFirstName })
-    })
-
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
-});
 

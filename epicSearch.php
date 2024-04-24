@@ -1,20 +1,15 @@
 <?php
+require_once 'vendor/autoload.php';
 
-if (isset($_GET['dob']) && isset($_GET['ptLastName']) && isset($_GET['ptFirstName'])) {
-    $birthdate = $_GET['dob'];
-    $lastName = $_GET['ptLastName'];
-    $firstName = $_GET['ptFirstName'];
-    $searchParams = [
-        'given' => $firstName,  
-        'family' => $lastName,
-        'birthdate' => $birthdate
-    ];
-    
-    performPatientSearch($searchParams);
-}
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Patient Search Logic (When the form is submitted)
 function performPatientSearch($searchParams) { // A function to handle searches with varied parameters
-    $baseUrl = 'https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4/Patient';  
+    error_log(print_r($searchParams, true));
+
+    $baseUrl = 'https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4/Patient';
     $client = new GuzzleHttp\Client();
 
     try {
@@ -57,13 +52,34 @@ function performPatientSearch($searchParams) { // A function to handle searches 
         // Check if token expired by looking for 401 Unauthorized
         if ($e->getResponse() && $e->getResponse()->getStatusCode() === 401) {
             // Token likely expired - Redirect to login
-            header('Location: /index.html');
+            header('Location: /index.php');
             exit; 
         } else {
             // Handle other Guzzle errors  
             echo "<p>An error occurred. Please contact support.</p>";
         }
     }
+}
+
+// Get the POST body
+$postData = file_get_contents('php://input');
+
+// Parse the JSON object
+$data = json_decode($postData, true);
+
+if (isset($data['dob']) && isset($data['ptLastName']) && isset($data['ptFirstName'])) {
+    $birthdate = $data['dob'];
+    $lastName = $data['ptLastName'];
+    $firstName = $data['ptFirstName'];
+    $searchParams = [
+        'given' => $firstName,  
+        'family' => $lastName,
+        'birthdate' => $birthdate
+    ];
+
+    performPatientSearch($searchParams);
+} else {
+    echo "<p>Search parameters missing. Please try again.</p>";
 }
 
 ?>

@@ -11,7 +11,7 @@ if (isset($_SESSION['access_token'])) {
 
 <div class="container rounded-3" style="margin-top: 3rem; margin-bottom: 3rem; border: 0.2rem solid #0968b8;">
 
-        <form id="myForm">
+        <form id="intakeForm">
             <fieldset>
                 <div class="row py-2" id="formHeaderRow">
                     <legend class="col-auto me-auto">Search for a Patient</legend>
@@ -37,21 +37,21 @@ if (isset($_SESSION['access_token'])) {
 
                     <div class="col form-group" id="dobDiv">
                         <label for="dob">Date of Birth* (Age: )</label>
-                        <input type="date" class="form-control" id="dob" required>
+                        <input type="date" class="form-control" id="dob" name="dob" required>
                     </div><!-- #dobDiv -->
 
                     <div class="col form-group" id="ptLastNameDiv">
                         <label for="ptLastName">Patient Last Name*</label>
-                        <input type="text" class="form-control" id="ptLastName" required>
+                        <input type="text" class="form-control" id="ptLastName" name="ptLastName" required>
                     </div><!-- ptLastNameDiv -->
 
                     <div class="col form-group" id="ptFirstNameDiv">
                         <label for="ptFirstName">Patient First Name*</label>
-                        <input type="text" class="form-control" id="ptFirstName" required>
+                        <input type="text" class="form-control" id="ptFirstName" name="ptFirstName" required>
                     </div><!-- ptFirstNameDiv -->
 
                     <div class="col form-group" id="nextPatientButtonDiv">
-                        <button type="submit" class="btn btn-primary standard-blue" id="nextPatientButton">Next</button>
+                        <button type="submit" class="btn btn-primary standard-blue" id="nextPatientButton" >Next</button>
                     </div><!-- nextPatientButtonDiv -->
 
                     <div class="col form-group" id="ptBiologicalSexDiv" style="display: none;">
@@ -79,7 +79,13 @@ if (isset($_SESSION['access_token'])) {
     <script src="js/script.js"></script>
 </body>
 </html>
-<?php } else {
+
+<?php 
+    
+
+
+
+} else {
     /* If we don't have a token, redirect to the login page */
     header('Location: /index.php');
 };
