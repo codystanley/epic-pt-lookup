@@ -1,15 +1,11 @@
 <?php
 require_once 'vendor/autoload.php';
-require_once 'config.php';
-
-$config = require 'config.php';
+require_once '../config.php';
 
 try {
     /* Connect to the database */
     $conn = new PDO(
-        'mysql:host=' . $config['database']['host'] . ';dbname=' . $config['database']['database_name'],
-        $config['database']['username'],
-        $config['database']['password']
+        'mysql:host=' . $CLOUDSQL_HOSTH . ';dbname=' . $CLOSUDSQL_DATABASE_NAME, $CLOUDSQL_USER,$CLOUDSQL_PASSWORD
     );
     
     /* Fetch Client Credentials from DB*/
@@ -30,4 +26,11 @@ $conn = null;
 /* Output the config as JSON */
 header('Content-Type: application/json');
 echo json_encode($loginConfig);
+
+include 'header.php'
+
 ?>
+
+    
+
+

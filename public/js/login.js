@@ -8,7 +8,7 @@ document.getElementById('initiateEpicLogin').addEventListener('click', initiateE
 
 // Function to initiate the Epic OAuth2 Authorization Code Flow
 async function initiateEpicLogin() {
-    const response = await fetch('epicLogin.php');
+    const response = await fetch('../epicLogin.php');
     const config = await response.json();
 
     const clientId = config.client_id;
