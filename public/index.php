@@ -1,6 +1,6 @@
 <?php
-require 'vendor/autoload.php';
-require 'config.php';
+require '../vendor/autoload.php';
+require '../config.php';
 include 'header.php';
 ?>
         <section class="row m-3" id="loginSection">
