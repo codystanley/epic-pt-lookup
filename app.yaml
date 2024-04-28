@@ -2,6 +2,8 @@ runtime: php83
 
 instance_class : F1
 
+entrypoint: serve /controller.php
+
 env_variables:
     GOOGLE_STORAGE_BUCKET: "epic-patient-lookup.appspot.com"
     CLOUDSQL_CONNECTION_NAME: "epic-patient-lookup:us-east1:epic-pt-lookup-mysql"
